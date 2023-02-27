@@ -24,7 +24,10 @@ const TodoItem = ({ todo, completeTodo, removeTodo }) => {
       >
         {title}
       </p>
-      <button className="flex-none" onClick={() => removeTodo(id)}>
+      <button
+        className="flex h-8 w-8 items-center justify-center"
+        onClick={() => removeTodo(id)}
+      >
         <CrossIcon />
       </button>
     </article>
