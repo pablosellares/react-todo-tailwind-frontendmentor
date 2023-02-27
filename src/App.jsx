@@ -1,73 +1,63 @@
-import React from "react";
-import CrossIcon from "./components/CrossIcon";
-import Luna from "./components/Luna";
+import React, { useState } from "react";
+import Header from "./components/Header";
+import TodoComputed from "./components/TodoComputed";
+import TodoCreate from "./components/TodoCreate";
+import TodoFilter from "./components/TodoFilter";
+import TodoList from "./components/TodoList";
+
+const initialStateTodos = [
+  {
+    id: 1,
+    title: "Go to the gym",
+    completed: true,
+  },
+  {
+    id: 2,
+    title: "Complete Javascript course",
+    completed: false,
+  },
+  {
+    id: 3,
+    title: "10 minutes meditation",
+    completed: false,
+  },
+  {
+    id: 4,
+    title: "Pick up groceries",
+    completed: false,
+  },
+  {
+    id: 5,
+    title: "Complete todo app on Frontend Mentor",
+    completed: false,
+  },
+];
 
 const App = () => {
+  const [todos, setTodos] = useState(initialStateTodos);
+
+  const createTodo = (title) => {
+    const newTodo = {
+      id: title.length + 1,
+      title,
+      completed: false,
+    };
+
+    setTodos([...todos, newTodo]);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-left-top bg-no-repeat">
-      <header className="container mx-auto px-4 pt-8">
-        <div className="flex justify-between">
-          <h1 className="text-3xl font-semibold uppercase tracking-[.6rem] text-white">
-            TODO
-          </h1>
-          <button>
-            <Luna className="fill-white" />
-          </button>
-        </div>
-      </header>
+      <Header />
       <main className="container mx-auto mt-8 px-4">
         {/* TodoCreate */}
-        <form className=" flex h-full w-full items-center gap-4 rounded-md bg-white px-6 py-4">
-          <button className="box-content inline-block h-2 w-2 rounded-full border-2 p-2"></button>
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Create a new todo..."
-            className="w-full text-gray-500 outline-none"
-          />
-        </form>
-
+        <TodoCreate createTodo={createTodo} />
         {/* TodoList (TodoItem) TodoUpdate & TodoDelete */}
-        <div className="mt-8 rounded-t-md bg-white ">
-          <article className="border-b-gray400 flex items-center gap-4 border-b px-6 py-4">
-            <button className="box-content inline-block h-2 w-2 rounded-full border-2 p-2"></button>
-            <p className="grow text-gray-600">
-              Complete online Javascript course
-            </p>
-            <button className="flex-none">
-              <CrossIcon />
-            </button>
-          </article>
-
-          <article className="border-b-gray400 flex items-center gap-4 border-b px-6 py-4">
-            <button className="box-content inline-block h-2 w-2 rounded-full border-2 p-2"></button>
-            <p className="grow">Complete online Javascript course</p>
-            <button className="flex-none">
-              <CrossIcon />
-            </button>
-          </article>
-        </div>
-
+        <TodoList todos={todos} />
         {/* TodoComputed */}
-        <section className="border-b-gray400 flex items-center justify-between gap-4 rounded-b-md bg-white px-6 py-4 text-[12px] text-gray-500">
-          <span>5 items left</span>
-          <button>Clear Completed</button>
-        </section>
-
+        <TodoComputed />
         {/* TodoFilter */}
-
-        <section className="container mx-auto mt-8">
-          <div className=" flex items-center justify-center gap-4 rounded-md bg-white p-4 font-semibold">
-            <button className="text-blue-500">All</button>
-            <button className="text-gray-400 hover:text-blue-500">
-              Active
-            </button>
-            <button className="text-gray-400 hover:text-blue-500">
-              Completed
-            </button>
-          </div>
-        </section>
+        <TodoFilter />
       </main>
 
       <footer className="mt-10 text-center text-gray-400">
