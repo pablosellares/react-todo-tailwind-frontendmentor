@@ -54,6 +54,10 @@ const App = () => {
     );
   };
 
+  const removeTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-left-top bg-no-repeat">
       <Header />
@@ -61,7 +65,11 @@ const App = () => {
         {/* TodoCreate */}
         <TodoCreate createTodo={createTodo} />
         {/* TodoList (TodoItem) TodoUpdate & TodoDelete */}
-        <TodoList todos={todos} completeTodo={completeTodo} />
+        <TodoList
+          todos={todos}
+          completeTodo={completeTodo}
+          removeTodo={removeTodo}
+        />
         {/* TodoComputed */}
         <TodoComputed />
         {/* TodoFilter */}
