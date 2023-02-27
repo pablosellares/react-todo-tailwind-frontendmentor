@@ -2,7 +2,7 @@ import React from "react";
 import IconCheck from "./Icons/IconCheck";
 import CrossIcon from "./Icons/IconCross";
 
-const TodoItem = ({ todo, completeTodo }) => {
+const TodoItem = ({ todo, completeTodo, removeTodo }) => {
   const { id, title, completed } = todo;
 
   return (
@@ -24,7 +24,7 @@ const TodoItem = ({ todo, completeTodo }) => {
       >
         {title}
       </p>
-      <button className="flex-none">
+      <button className="flex-none" onClick={() => removeTodo(id)}>
         <CrossIcon />
       </button>
     </article>
