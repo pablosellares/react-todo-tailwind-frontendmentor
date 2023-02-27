@@ -1,5 +1,5 @@
 import React from "react";
-import Luna from "./Luna";
+import Luna from "./Icons/IconMoon";
 
 const Header = () => {
   return (

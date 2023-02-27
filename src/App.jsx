@@ -29,7 +29,7 @@ const initialStateTodos = [
   {
     id: 5,
     title: "Complete todo app on Frontend Mentor",
-    completed: false,
+    completed: true,
   },
 ];
 
@@ -39,11 +39,19 @@ const App = () => {
   const createTodo = (title) => {
     const newTodo = {
       id: title.length + 1,
-      title,
+      title: title.trim(),
       completed: false,
     };
 
     setTodos([...todos, newTodo]);
+  };
+
+  const completeTodo = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
 
   return (
@@ -53,7 +61,7 @@ const App = () => {
         {/* TodoCreate */}
         <TodoCreate createTodo={createTodo} />
         {/* TodoList (TodoItem) TodoUpdate & TodoDelete */}
-        <TodoList todos={todos} />
+        <TodoList todos={todos} completeTodo={completeTodo} />
         {/* TodoComputed */}
         <TodoComputed />
         {/* TodoFilter */}
