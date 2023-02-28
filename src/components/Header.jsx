@@ -1,15 +1,28 @@
-import React from "react";
-import Luna from "./Icons/IconMoon";
+import React, { useEffect, useState } from "react";
+import IconMoon from "./Icons/IconMoon";
+import IconSun from "./Icons/IconSun";
 
 const Header = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    darkMode
+      ? document.documentElement.classList.add("dark")
+      : document.documentElement.classList.remove("dark");
+  }, [darkMode]);
+
   return (
     <header className="container mx-auto px-4 pt-8">
       <div className="flex justify-between">
         <h1 className="text-3xl font-semibold uppercase tracking-[.6rem] text-white">
           TODO
         </h1>
-        <button>
-          <Luna className="fill-white" />
+        <button onClick={() => setDarkMode(!darkMode)}>
+          {darkMode ? (
+            <IconSun className="fill-white" />
+          ) : (
+            <IconMoon className="fill-white" />
+          )}
         </button>
       </div>
     </header>
