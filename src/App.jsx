@@ -64,7 +64,7 @@ const App = () => {
     setTodos(todos.filter((todo) => !todo.completed));
   };
 
-  const [filter, setFilter] = useState("active");
+  const [filter, setFilter] = useState("all");
 
   const changeFilter = (filter) => setFilter(filter);
 
