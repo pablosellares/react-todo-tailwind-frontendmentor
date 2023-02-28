@@ -88,9 +88,9 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-left-top bg-no-repeat text-[14px] transition-all duration-500 dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] md:bg-[url('./assets/images/bg-desktop-light.jpg')] md:bg-cover md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]">
+    <div className="min-h-screen bg-gray-100 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-left-top bg-no-repeat text-[14px] transition-all duration-500 dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] md:bg-[url('./assets/images/bg-desktop-light.jpg')] md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]">
       <Header />
-      <main className="container mx-auto mt-8 px-4">
+      <main className="container mx-auto mt-8 px-4 md:max-w-xl">
         {/* TodoCreate */}
         <TodoCreate createTodo={createTodo} />
         {/* TodoList (TodoItem) TodoUpdate & TodoDelete */}
