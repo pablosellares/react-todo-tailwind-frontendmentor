@@ -58,18 +58,27 @@ const App = () => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const showAllTodos = () => {
-    setTodos(
-      todos.filter((todo) => {
-        return todo;
-      })
-    );
-  };
-
   const computedItemsLeft = todos.filter((todo) => !todo.completed).length;
 
   const clearCompleted = () => {
     setTodos(todos.filter((todo) => !todo.completed));
+  };
+
+  const [filter, setFilter] = useState("active");
+
+  const changeFilter = (filter) => setFilter(filter);
+
+  const filteredTodos = () => {
+    switch (filter) {
+      case "all":
+        return todos;
+      case "active":
+        return todos.filter((todo) => !todo.completed);
+      case "completed":
+        return todos.filter((todo) => todo.completed);
+      default:
+        return todos;
+    }
   };
 
   return (
@@ -80,7 +89,7 @@ const App = () => {
         <TodoCreate createTodo={createTodo} />
         {/* TodoList (TodoItem) TodoUpdate & TodoDelete */}
         <TodoList
-          todos={todos}
+          todos={filteredTodos()}
           completeTodo={completeTodo}
           removeTodo={removeTodo}
         />
@@ -90,7 +99,7 @@ const App = () => {
           clearCompleted={clearCompleted}
         />
         {/* TodoFilter */}
-        <TodoFilter todos={todos} showAllTodos={showAllTodos} />
+        <TodoFilter changeFilter={changeFilter} filter={filter} />
       </main>
 
       <footer className="mt-10 text-center text-gray-400">
