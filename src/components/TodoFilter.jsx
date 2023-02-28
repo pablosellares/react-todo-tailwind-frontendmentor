@@ -9,7 +9,7 @@ const TodoFilter = ({ filter, changeFilter }) => {
           className={`${
             filter === "all"
               ? "text-blue-500 hover:text-gray-400"
-              : "text-gray-400 hover:text-blue-500"
+              : "text-gray-400 hover:text-blue-500 focus:text-blue-500"
           }`}
         >
           All
@@ -19,7 +19,7 @@ const TodoFilter = ({ filter, changeFilter }) => {
           className={`${
             filter === "active"
               ? "text-blue-500 hover:text-gray-400"
-              : "text-gray-400 hover:text-blue-500"
+              : "text-gray-400 hover:text-blue-500 focus:text-blue-500"
           }`}
         >
           Active
@@ -29,7 +29,7 @@ const TodoFilter = ({ filter, changeFilter }) => {
           className={`${
             filter === "completed"
               ? "text-blue-500 hover:text-gray-400"
-              : "text-gray-400 hover:text-blue-500"
+              : "text-gray-400 hover:text-blue-500 focus:text-blue-500"
           }`}
         >
           Completed
