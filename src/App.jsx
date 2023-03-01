@@ -1,3 +1,5 @@
+import { DragDropContext } from "@hello-pangea/dnd";
+
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import TodoComputed from "./components/TodoComputed";
@@ -5,38 +7,32 @@ import TodoCreate from "./components/TodoCreate";
 import TodoFilter from "./components/TodoFilter";
 import TodoList from "./components/TodoList";
 
-// const initialStateTodos = [
-//   {
-//     id: 1,
-//     title: "Go to the gym",
-//     completed: true,
-//   },
-//   {
-//     id: 2,
-//     title: "Complete Javascript course",
-//     completed: false,
-//   },
-//   {
-//     id: 3,
-//     title: "10 minutes meditation",
-//     completed: false,
-//   },
-//   {
-//     id: 4,
-//     title: "Pick up groceries",
-//     completed: false,
-//   },
-//   {
-//     id: 5,
-//     title: "Complete todo app on Frontend Mentor",
-//     completed: true,
-//   },
-// ];
-
 const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [];
+
+const reorder = (list, startIndex, endIndex) => {
+  const result = [...list];
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};
 
 const App = () => {
   const [todos, setTodos] = useState(initialStateTodos);
+
+  const handleDragEnd = (result) => {
+    const { destination, source } = result;
+    if (!destination) return;
+    if (
+      source.index === destination.index &&
+      source.droppableId === destination.droppableId
+    )
+      return;
+
+    setTodos((prevTasks) =>
+      reorder(prevTasks, source.index, destination.index)
+    );
+  };
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -94,11 +90,13 @@ const App = () => {
         {/* TodoCreate */}
         <TodoCreate createTodo={createTodo} />
         {/* TodoList (TodoItem) TodoUpdate & TodoDelete */}
-        <TodoList
-          todos={filteredTodos()}
-          completeTodo={completeTodo}
-          removeTodo={removeTodo}
-        />
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <TodoList
+            todos={filteredTodos()}
+            completeTodo={completeTodo}
+            removeTodo={removeTodo}
+          />
+        </DragDropContext>
         {/* TodoComputed */}
         <TodoComputed
           computedItemsLeft={computedItemsLeft}
